@@ -1,54 +1,46 @@
-# 2025-group-06
+# Cortex Cruiser – A Self-Driving Prototype in Action
 
-## Add your files
+<img src="images/cortex-cruiser-image.png" alt="App Screenshot" width="400"/>
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.chalmers.se/courses/dit638/students/2025-group-06.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://git.chalmers.se/courses/dit638/students/2025-group-06/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Cortex Cruiser is a self-driving car prototype project developed for the course DIT639: Cyber-Physical Systems and System of Systems at the University of Gothenburg. The system detects cones in video recordings and computes steering angles in real time, supported by an automated performance testing pipeline.
 
-## Badges
-<img src="https://git.chalmers.se/courses/dit638/students/2025-group-06/badges/main/pipeline.svg?style=flat">
-<img src="https://git.chalmers.se/courses/dit638/students/2025-group-06/-/badges/release.svg?style=flat">
+#### Snapshot of the application running
+
+<img src="images/demo-image.png" alt="App Screenshot" width="400"/>
+
+### Overview
+
+The project combines computer vision, modular architecture, and automated testing to simulate autonomous driving. At its core, the system uses OpenCV to identify cones from track footage, estimates the center path, and calculates steering angles accordingly.
+
+To evaluate the algorithm, we built a dedicated performance testing application that runs on recorded data, outputs results to CSV, and generates plots to visualize accuracy across different commits. This tool is integrated into a CI/CD pipeline, ensuring that improvements are continuously validated.
+
+#### Example of image mask that detects yellow cones
+
+<img src="images/hsv-image.png" alt="App Screenshot" width="400"/>
+
+### Architecture
+
+The system is organized into three parts:
+
+1. Main Data Processing Chain – microservices that process recordings and simulate car behavior.
+
+2. Steering Module – encapsulates the cone-based algorithm, designed for easy modification.
+
+3. Performance Testing Tool – a standalone program that automates accuracy checks and feeds results into the CI/CD pipeline.
+
+#### Architecture Diagram
+<img src="images/architecture.png" alt="App Screenshot" width="400"/>
+
+### Steering Algorithm
+
+Our algorithm relies solely on video input. Each frame is converted to HSV color space, cones are isolated through color masks, and centroids are calculated for path estimation. The steering angle is then derived from the offset between the image center and the estimated track center.
+Fallback methods ensure robustness when cones are missing, though in practice the system almost always relies on historical centroids from previous frames.
+
+### Development Process
+
+We worked collaboratively, with each assignment milestone serving as a checkpoint. Tools like GitLab issues, branches, and CI pipelines supported our workflow. Large Language Models were also used to accelerate tasks such as script generation, debugging, and pipeline setup — particularly useful in areas where we had little prior experience.
 
 ## Requirements & Dependencies
 
@@ -76,7 +68,7 @@ The tools required to be installed on the system are:
     - wget: sudo apt-get install wget
     - git: sudo apt-get install git
 ## Required files
-* catch.hpp
+* catch.hpp (used for testing)
     - download: https://github.com/catchorg/Catch2/releases/download/v2.13.10/catch.hpp)
 
 
@@ -87,6 +79,9 @@ mkdir dit639
 cd dit639
 git clone git@git.chalmers.se:courses/dit638/students/2025-group-06.git
 ```
+
+Note: The original repository was hosted on GitLab and is no longer available
+
 ## Building and excecuting in the terminal
 This project uses cmake for building files. To build a file you navigate to the location of the file you want to build.
 ```
@@ -118,131 +113,8 @@ After you have built the file, the file is now excecutable. Make sure you are in
 ```
 
 ## Authors and acknowledgment
-- Martin Lidgren @marlidg
+- Martin Lidgren
 - Edvin Sanfridssson 
 - Love Carlander Strandäng
-- Erik Nisbet @eriknis
+- Erik Nisbet
 
-## License
-
-## Creating new features
-
-This section outlines the workflow of creating new features for the project using Git issues. These standards are to be followed throughout the duration of the project.
-
-### Creating issues
-
-An issue should be created based on a requirement that represents a required feature. The issue title should be a clear, concise summary of the request.
-
-Every issue related to a feature should have at least one user story. A user story represents the need of a user that would require the feature to be implemented.
-
-### Template for Issues
-
-### Title
-
-Provide a clear, concise summary of the issue.
-
-### User Story
-
-> As a `<replace>`, I want `<replace>` so that `<replace>`
-
-### Short Description
-
-Include any additional details that may not be covered in the user story or acceptance criteria.
-
-### Acceptance Criteria
-
-- [ ] Verify that `<replace>`
-- [ ] Verify that `<replace>`
-
----
-
-### Non-Feature Issues
-
-For issues not related to a specific feature, omit the user story but keep the same template structure (Title, Short Description, and Acceptance Criteria).
-
-### Labels
-
-All issues should be labeled with relevant labels found in the label dropdown at issue creation.
-
-### Feature branching
-
-All issues regarding changes in the repo should have their own branch. The branch should be created from the issue's page in Gitlab and subsequently be named
-in the format of <issue-name>-<title>.
-
-## Fixing unexpected behavior in existing features
-
-When working on unexpected behaviour or 'bugs', the same standard as feature development is in place. That includes, issue creation, 'feature branching' and labelling the issues correctly. Making sure the description of the unexpected behavior is clear in the issue description.
-Useful labels can be 'bug' or 'refactor' depending on what work is needed.
-
-## Commit messages
-
-This section outlines the standard praxis for commits in the project. The aim of the chapter is to give a clear modus operandi for any developer contributing.
-
-### Atomic Commits
-
-- Commits should represent a single logical change
-- Break larger changes into smaller commits for easier understandability
-- Commit related changes meaning avoid grouping unrelated changes into the same commit
-
-### Write Clear Commit Messages
-
-- Start each commit with a # for the issue it relates to
-- Each commit shall use imperative mood (e.g "Add feature", **NOT** "Added feature")
-- Describe changes concisely and precisely ("Add.." related to adding, "Refactor..." related to refactoring etc.)
-
-### Avoid committing Unnecessary Files
-
-- Includes developer environment files, build files etc.
-
-### Security Practice
-
-- Don't commit sensitive information such as passwords, network ID's or personal data
-
-### **Commit Message Template:**
-
-**Git commit -m “\<#issue-number\> - \<TITLE\>” -m “More detailed description”**
-
-* **`<#issue-number>`**: The issue the commit is connected to.
-* **`<TITLE>`**: In your head, think: “If I commit this, it will...” and complete the sentence with the title. This should be a concise summary of the change.
-* **`More detailed description`**: Use the second **`-m`** option to provide a detailed description if necessary.
-
-## Merge requests & code review
-
-This page contains the guidelines for merge requests in the StuWi project repo. The aim of the page is to give a clear conduct for both developers creating merge requests and reviewing merge requests.
-
-### Creating Merge Requests
-
-Merge requests are to be created once the issue/issues it resolves have been fully implemented according to their acceptance criteria. Merge requests are required when merging from a feature branch to the main branch. When creating a request, choose the standard project template as such:
-
----
-
-**Description** <br />  
-`_Description about the merge. what it affects and what you have done_`
-
-**Related issue**   
-Closes issue #X 
-
-**Authors & Co-Authors** <br />
-_Authors_
-
----
-
-Once the correct details have been filled out, assign yourself as the responsible for the request and a project member who have not made a commit in the merge request as the reviewer.
-
-### Reviewing Merge Requests
-
-As the reviewer of a merge request, your job is to review the changes made and make sure they adhere to the following:
-
-- Implements the correct features
-- Satisfies all the acceptance criteria
-- Maintains high code quality
-- Check for any potential bugs
-
-**Feedback**
-
-After reviewing, comment on the merge request with feedback. Communication should remain respectful, clear and constructive. When the request responsible have addressed the feedback with potential additional changes, review the new changes and approve the merge request if everything is in order.
-
-
-### Merging with target branch
-
-Before merging with the target branch, all merge conflicts are to be resolved locally and approval from the reviewer need to have been granted. As a general practice upon merge, the source branch should be closed. Exercise your own judgement on whether the source branch should be kept or deleted.
