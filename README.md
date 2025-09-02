@@ -8,7 +8,7 @@ Cortex Cruiser is a self-driving car prototype project developed for the course 
 
 #### Snapshot of the application running
 
-<img src="images/demo-image.png" alt="App Screenshot" width="400"/>
+<img src="images/demo-image.png" alt="App Screenshot" width="600"/>
 
 ### Overview
 
@@ -18,7 +18,7 @@ To evaluate the algorithm, we built a dedicated performance testing application 
 
 #### Example of image mask that detects yellow cones
 
-<img src="images/hsv-image.png" alt="App Screenshot" width="400"/>
+<img src="images/hsv-image.png" alt="App Screenshot" width="600"/>
 
 ### Architecture
 
@@ -31,7 +31,7 @@ The system is organized into three parts:
 3. Performance Testing Tool – a standalone program that automates accuracy checks and feeds results into the CI/CD pipeline.
 
 #### Architecture Diagram
-<img src="images/architecture.png" alt="App Screenshot" width="400"/>
+<img src="images/architecture.png" alt="App Screenshot" width="600"/>
 
 ### Steering Algorithm
 
